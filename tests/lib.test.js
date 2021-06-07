@@ -67,3 +67,21 @@ describe("get product", () => {
     expect(result).toHaveProperty("id", 1);
   });
 });
+
+describe("registerUser", () => {
+  it("should throw if username is falsy", () => {
+    // Falsy in JS => 0, false, null, undefined, NaN, ''
+    const args = [null, undefined, 0, "", NaN, false];
+    args.forEach((a) => {
+      expect(() => {
+        lib.registerUser(a);
+      }).toThrow();
+    });
+  });
+
+  it("should return a user object if valid username is passed", () => {
+    const res = lib.registerUser("manav");
+    expect(res).toMatchObject({ username: "manav" });
+    expect(res.id).toBeGreaterThan(0);
+  });
+});
