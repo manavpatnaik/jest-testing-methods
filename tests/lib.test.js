@@ -48,3 +48,22 @@ describe("getCurrencies", () => {
     expect(res).toEqual(expect.arrayContaining(["EUR", "USD", "AUD"]));
   });
 });
+
+describe("get product", () => {
+  it("should return product with given ID", () => {
+    const result = lib.getProduct(1);
+
+    // Will fail - Objects have different memories
+    // expect(result).toBe({ id: 1, price: 10 });
+
+    // Correct way
+    expect(result).toEqual({ id: 1, price: 10 });
+
+    // Checks if those properties are present in the result
+    // with this, we can match only the properties we are interested in
+    expect(result).toMatchObject({ id: 1, price: 10 });
+
+    // If we want to check only one property
+    expect(result).toHaveProperty("id", 1);
+  });
+});
