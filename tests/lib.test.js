@@ -1,4 +1,5 @@
 const lib = require("../lib");
+const db = require("../db");
 
 describe("absolute", () => {
   it("should return a +ve num if input is +ve", () => {
@@ -83,5 +84,18 @@ describe("registerUser", () => {
     const res = lib.registerUser("manav");
     expect(res).toMatchObject({ username: "manav" });
     expect(res.id).toBeGreaterThan(0);
+  });
+});
+
+describe("applyDiscount", () => {
+  it("should apply 10% discount if customer has more than 10 points", () => {
+    // Mocking the db read function
+    db.getCustomerSync = function (id) {
+      console.log("Fake DB read");
+      return { id, points: 20 };
+    };
+
+    const order = { customerId: 1, totalPrice: 10 };
+    lib.applyDiscount(order);
   });
 });

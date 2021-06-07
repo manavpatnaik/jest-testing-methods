@@ -25,7 +25,7 @@ describe("FizzBuzz", () => {
     expect(res).toBe("Buzz");
   });
 
-  it("should return Buzz if number is not divisible by neither 5 nor 3", () => {
+  it("should return input if number is not divisible by neither 5 nor 3", () => {
     const res = fizzbuzz(8);
     expect(res).toBe(8);
   });
